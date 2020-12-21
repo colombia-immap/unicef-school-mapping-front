@@ -1,0 +1,357 @@
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.example-container {
+    height: 100%;
+    background-color: rgb(185, 209, 253);
+}
+
+.panel-container {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+a {
+    position: absolute;
+    margin: 2px;
+}
+
+.map-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.input-container a {
+    background-color: #FFFFFF;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.input-container {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    transition:left 0.1s linear;
+}
+.input-container-modal {
+    position: absolute;
+    left: 57px;
+    top: 5px;
+    transition:left 0.1s linear;
+}
+
+.input-container-modal-est {
+    position: absolute;
+    left: 5px;
+    bottom: 100px;
+    transition:left 0.1s linear;
+}
+
+.input-container-modal a, .input-container-modal-est a {
+    background-color: #FFFFFF;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.input-container.active {
+    left: calc(30vw - 5px);
+    transition:left 0.35s linear;
+    transition-delay: 0.12s;
+}
+
+.text-black-100 {
+    color: #000000;
+
+}
+body {
+	text-align: center;
+}
+
+div {
+	float: center;
+}
+#waveformchart svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+#waveformchart { 
+	width: 100%;
+	height: 140px;
+	background-color: #333;
+	position: relative;
+	margin-bottom: 20px;
+}
+.axis {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+
+.axis text {
+	font: 11px sans-serif;
+	fill: #000;
+	stroke: none;
+	font-weight: bold;
+}
+
+.axis line {
+	stroke: #ccc;
+}
+
+.axis path {
+	stroke: #ccc;
+}
+#waveformchart .bar{ 
+	-ms-transform: scale(1,1); /* IE 9 */
+    -webkit-transform: scale(1,1); /* Safari */
+    transform: scale(1,1);
+}
+
+#waveformchart .bar:hover { 
+	height: 100%;
+	-ms-transform: scale(2,100); /* IE 9 */
+    -webkit-transform: scale(2,100); /* Safari */
+    transform: scale(2,100);
+    -ms-transform-origin: 50% 50%; /* IE 9 */
+    -webkit-transform-origin: 50% 50%; /* Chrome, Safari, Opera */
+    transform-origin: 50% 50%;
+}
+
+.bar:hover {    
+	fill: #E55;
+}
+
+.dot:hover {
+	fill: #E55;
+}
+
+.area:hover {
+	fill: #E55;
+}
+
+.line {
+	padding: 10px;
+}
+
+.line:hover {
+	stroke: #E55;
+}
+
+.arc path:hover {
+	fill: #E55;
+}
+
+.arc text {
+	font: 11px sans-serif;
+	fill: #000;
+	stroke: none;
+	font-weight: bold;
+}
+
+.modal-content .tooltip {
+	padding: 3px;
+	border: 2px solid;
+	border-radius: 4px;
+	background-color: #eee;
+	opacity: 0.6;
+	justify-content: center;
+	align-items: center;
+}
+
+.brush .extent {
+  stroke: #000;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
+.brush .background {
+  fill: #ddd;
+
+}
+
+.layers {
+        background: #fff;
+        position: absolute;
+        z-index: 1;
+        top: 10px;
+        right: 10px;
+        border-radius: 3px;
+        width: 150px;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        font-family: 'Open Sans', sans-serif;
+}
+
+.layers li {
+    font-size: 18px;
+    color: #404040;
+    display: block;
+    margin: 0;
+    padding: 0;
+    padding: 0px;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.layers li:last-child {
+    border: none;
+}
+
+.nav {
+    display: block !important;
+}
+
+.layers li:hover {
+    background-color: #f8f8f8;
+    color: #404040;
+}
+
+.layers li a {
+    position: relative !important;
+    display: block;
+    margin: 0;
+
+}
+
+
+.layers li a.active {
+    background-color: #3887be;
+    background: #3887be;
+    background-origin: padding-box;
+
+   
+}
+
+.map-overlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.8);
+    margin-right: 20px;
+    font-family: Arial, sans-serif;
+    overflow: auto;
+    border-radius: 3px;
+  }
+
+  #legend {
+    padding: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    line-height: 18px;
+    height: 110px;
+    margin-bottom: 40px;
+    width: 140px;
+    text-align: center;
+  }
+
+  .legend-key{
+    display: inline-block;
+    border-radius: 20%;
+    width: 40px;
+    height: 20px;
+    margin-right: 5px;
+    background-color: #239B56;
+    text-align: center;
+  }
+
+  .legend-key1{
+    display: inline-block;
+    border-radius: 20%;
+    width: 40px;
+    height: 20px;
+    margin-right: 5px;
+    background-color: #FFF333;
+    text-align: center;
+  }
+
+  .legend-key2{
+    display: inline-block;
+    border-radius: 20%;
+    width: 40px;
+    height: 20px;
+    margin-right: 5px;
+    background-color: #F91C12;
+    text-align: center;
+  }
+
+
+.layers li .active {
+    background: #3887be !important;
+    background-color: #3887be !important;
+    color: #ffffff;
+}
+
+.layers li a {
+    color: #404040;
+}
+
+.layers li.active:hover {
+    background: #3074a4;
+}
+
+.modal-content .col-sm-3 .redBorder {
+    border: 2px dotted red;
+  }
+  
+  .modal-content .col-sm-3 .shadow {
+    box-shadow: 1px 1px 6px 6px #ccc;
+  }
+  
+  .modal-content .col-sm-3  .topOffset {
+    margin-top: 1rem;
+  }
+  
+
+  .apexcharts-legend-series {
+    display: none !important;
+  }
+
+
+ 
