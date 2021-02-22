@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import SlidingPanel from "react-sliding-side-panel";
 import mapboxgl from "mapbox-gl";
-import {Row, Container, Col, Button, Modal, Table, Form, Nav  } from "react-bootstrap";
+import {Row, Container, Col, Button, Modal, Table, Form, Nav} from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import {BarChart, PieChart} from 'react-d3-components';
 import ReactApexCharts from "react-apexcharts";
@@ -26,8 +26,8 @@ class App extends Component {
         const urlssaberdpto = process.env.REACT_APP_BACK_URL + 'pruebadpto/';
         const urlssabermpio = process.env.REACT_APP_BACK_URL + 'pruebampio/';
         const urlssaberee = process.env.REACT_APP_BACK_URL + 'pruebaee/';
-        const urlsmunicipios = process.env.REACT_APP_BACK_URL + 'municipios/';
         this.state = helperMap.initializeMapState(config);
+        this.state.urlsmunicipios = process.env.REACT_APP_BACK_URL + 'municipios/';
         this.updateValue = this.updateValue.bind(this);
         this.hoverlayers = this.hoverlayers.bind(this);
         this.areglografica = this.areglografica.bind(this);
@@ -59,7 +59,7 @@ class App extends Component {
         this.state.valorfinal = "";
         this.state.checkconectado = false;
         this.state.checkdesconectado = false;
-         this.state.checkconexion = "Todos";
+        this.state.checkconexion = "Todos";
         this.state.valorselect = "Todos";
         this.state.geojson = "";
         this.state.gjson = "";
@@ -70,90 +70,82 @@ class App extends Component {
         this.state.promesa = "";
         this.state.endDate = new Date();
         this.state.startDate = new Date();
-        this.state.pruebasaberdpto="";
-        this.state.pruebasabermpio="";
-        this.state.listaEE="";
-        this.state.pruebasaberee="";
-        this.state.showmodal=false;
-        this.state.showmodalM=false;
-        this.state.vigencia="Todos";
-        this.state.arraymunicipios=[];
-        this.state.municipios="Todos";
-        var resultadomunicipio="";
-        this.state.loading=true;
-        this.state.layoutcolegios="active";
-        this.state.layoutmunicipios="";
-        this.state.layoutEE="";
+        this.state.pruebasaberdpto = "";
+        this.state.pruebasabermpio = "";
+        this.state.listaEE = "";
+        this.state.pruebasaberee = "";
+        this.state.showmodal = false;
+        this.state.showmodalM = false;
+        this.state.vigencia = "Todos";
+        this.state.arraymunicipios = [];
+        this.state.municipios = "Todos";
+        this.state.loading = true;
+        this.state.layoutcolegios = "active";
+        this.state.layoutmunicipios = "";
+        this.state.layoutEE = "";
 
-        //
+        this.state.DepartamentoEE = "";
+        this.state.MunicipioEE = "";
+        this.state.Nombreestablecimiento = "";
+        this.state.Sector_atencion = "";
+        this.state.Calendario = "";
+        this.state.Tasa_aprobacion = "";
+        this.state.Tasa_reprobacion = "";
+        this.state.Tasa_desercion = "";
+        this.state.IRTE = "";
+        this.state.showmodalEE = false;
+        this.state.urlmunicipios = [];
 
-        this.state.DepartamentoEE="";
-        this.state.MunicipioEE="";
-        this.state.Nombreestablecimiento="";
-        this.state.Sector_atencion="";
-        this.state.Calendario="";
-        this.state.Tasa_aprobacion="";
-        this.state.Tasa_reprobacion="";
-        this.state.Tasa_desercion="";
-        this.state.IRTE="";
-        this.state.showmodalEE=false;
-        this.state.urlmunicipios="";
+        this.state.M_Departamento = "";
+        this.state.M_Municipio = "";
+        this.state.M_IPM = "";
+        this.state.Tasa_aprobacion2018 = "";
+        this.state.Tasa_aprobacion2019 = "";
+        this.state.M_IRTE = "";
+        this.state.display = 'none';
+        this.state.filtrosede = 'block';
+        this.state.displayestablecimientos = 'none';
+        this.state.displayIRTE = 'none';
+        this.state.displaysedes = 'none';
 
-        this.state.M_Departamento="";
-        this.state.M_Municipio="";
-        this.state.M_IPM="";
-        this.state.Tasa_aprobacion2018="";
-        this.state.Tasa_aprobacion2019="";
-        this.state.M_IRTE="";
-        this.state.display='none';
-        this.state.filtrosede='block';
-        this.state.displayestablecimientos='none';
-        this.state.displayIRTE='none';
-        this.state.displaysedes='none';
+        this.state.codigodepartamento = [{codigo: 105, departamento: 'Antioquia'},
+            {codigo: 168, departamento: 'Santander'},
+            {codigo: 1, departamento: 'Amazonas'},
+            {codigo: 8, departamento: 'Arauca'},
+            {codigo: 38, departamento: 'Guainía'},
+            {codigo: 39, departamento: 'Guaviare'},
+            {codigo: 53, departamento: 'Putumayo'},
+            {codigo: 59, departamento: 'San Andrés y Providencia'},
+            {codigo: 77, departamento: 'Vaupés'},
+            {codigo: 78, departamento: 'Vichada'},
+            {codigo: 108, departamento: 'Atlántico'},
+            {codigo: 113, departamento: 'Bolívar'},
+            {codigo: 115, departamento: 'Boyacá'},
+            {codigo: 117, departamento: 'Caldas'},
+            {codigo: 118, departamento: 'Caquetá'},
+            {codigo: 119, departamento: 'Cauca'},
+            {codigo: 120, departamento: 'Cesar'},
+            {codigo: 123, departamento: 'Córdoba'},
+            {codigo: 125, departamento: 'Cundinamarca'},
+            {codigo: 127, departamento: 'Chocó'},
+            {codigo: 141, departamento: 'Huila'},
+            {codigo: 185, departamento: 'Casanare'},
+            {codigo: 170, departamento: 'Sucre'},
+            {codigo: 176, departamento: 'Valle del Cauca'},
+            {codigo: 173, departamento: 'Tolima'},
+            {codigo: 166, departamento: 'Risaralda'},
+            {codigo: 163, departamento: 'Quindio'},
+            {codigo: 154, departamento: 'Norte de Santander'},
+            {codigo: 152, departamento: 'Nariño'},
+            {codigo: 150, departamento: 'Meta'},
+            {codigo: 147, departamento: 'Magdalena'},
+            {codigo: 144, departamento: 'La Guajira'}
+        ];
 
-
-
-
-        this.state.codigodepartamento =[{codigo:105 , departamento:'Antioquia'},
-        {codigo:168 , departamento:'Santander'},
-        {codigo:1 , departamento:'Amazonas'},
-        {codigo:8 , departamento:'Arauca'},
-        {codigo:38 , departamento:'Guainía'},
-        {codigo:39  , departamento:'Guaviare'},
-        {codigo:53  , departamento:'Putumayo'},
-        {codigo:59  , departamento:'San Andrés y Providencia'},
-        {codigo:77  , departamento:'Vaupés'},
-        {codigo:78  , departamento:'Vichada'},
-        {codigo:108  , departamento:'Atlántico'},
-        {codigo:113 , departamento:'Bolívar'},
-        {codigo:115 , departamento:'Boyacá'},
-        {codigo:117 , departamento:'Caldas'},
-        {codigo:118 , departamento:'Caquetá'},
-        {codigo:119 , departamento:'Cauca'},
-        {codigo:120 , departamento:'Cesar'},
-        {codigo:123 , departamento:'Córdoba'},
-        {codigo:125 , departamento:'Cundinamarca'},
-        {codigo:127 , departamento:'Chocó'},
-        {codigo:141 , departamento:'Huila'},
-        {codigo:185 , departamento:'Casanare'},
-        {codigo:170  , departamento:'Sucre'},
-        {codigo:176 , departamento:'Valle del Cauca'},
-        {codigo:173 , departamento:'Tolima'},
-        {codigo:166 , departamento:'Risaralda'},
-        {codigo:163 , departamento:'Quindio'},
-        {codigo:154 , departamento:'Norte de Santander'},
-        {codigo:152 , departamento:'Nariño'},
-        {codigo:150 , departamento:'Meta'},
-        {codigo:147 , departamento:'Magdalena'},
-        {codigo:144 , departamento:'La Guajira'}
-    ];
-
-      
-
-        this.state.series=[{
-              name: 'GRADO 3',
-              data: [{ x: 'Evaluados', y: 0},{ x:'promedio', y: 0},{ x:'error estandar', y: 0}]
-            },
+        this.state.series = [{
+            name: 'GRADO 3',
+            data: [{x: 'Evaluados', y: 0}, {x: 'promedio', y: 0}, {x: 'error estandar', y: 0}]
+        },
             {
                 name: 'GRADO 5',
                 data: [{x: 'w1', y: 0}, {x: 'w2', y: 0}, {x: 'error estandar', y: 0}]
@@ -182,26 +174,31 @@ class App extends Component {
 
         this.state.sort = null;
 
-        this.state.piechart = "";
+        this.state.piechart = {
+            label: 'Answer',
+            values: [{x: 'Total Computador escritorio', y: 0}, {
+                x: 'Total Portatiles',
+                y: 0
+            }]
+        };
         this.state.tooltipPie = function (x, y) {
             return y;
         };
 
         this.state.bardata3 = [{
             label: 'Answer',
-            values: [{x: 'Something A', y: 0}, {x: 'Something B', y: 4}]
-        }];
-
-        this.state.bardata2 = [{
-            label: 'Answer',
-            values: [{x: 'SomethingA', y: 10}, {x: 'SomethingB', y: 4}, {x: 'SomethingC', y: 3}]
+            values: [{x: 'Ancho Banda', y: 0}, {x: 'Total Computadores', y: 0}]
         }];
         this.state.tooltipScatter = "";
 
 
         //Inicio servicio api departamentos
 
-        let pruebasaberdpto = fetch(urlssaberdpto, []).then(res => res.json()).then(data => {
+        let pruebasaberdpto = fetch(urlssaberdpto, {
+            crossDomain: true,
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+        }).then(res => res.json()).then(data => {
             const newFeaturesList = data;
             return Promise.resolve({
                 resultado: newFeaturesList
@@ -210,35 +207,18 @@ class App extends Component {
 
         var promResueltadpto = Promise.resolve(pruebasaberdpto);
 
-        var datoresultante = promResueltadpto.then((json) => {
+        promResueltadpto.then((json) => {
             this.state.pruebasaberdpto = json.resultado;
             return json;
         });
 
-       
-        //Inicio servicio api municipiosEE
-
-        var urlmunicipios = fetch(urlsmunicipios, []).then(res => res.json()).then(data => {
-            const newFeaturesList = data;
-            return Promise.resolve({
-                resultado: newFeaturesList
-            });
-        });
-
-   
-
-        var urlmunicipiospromesa = Promise.resolve(urlmunicipios);
-
-        var datoresultante = urlmunicipiospromesa.then((json) => {
-
-            this.state.urlmunicipios = json.resultado;
-            return json;
-        });
-
-
         //Inicio servicio api municipios
 
-        let pruebasabermunicipio = fetch(urlssabermpio, []).then(res => res.json()).then(data => {
+        let pruebasabermunicipio = fetch(urlssabermpio, {
+            crossDomain: true,
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+        }).then(res => res.json()).then(data => {
             const newFeaturesList = data;
             return Promise.resolve({
                 resultado: newFeaturesList
@@ -247,15 +227,18 @@ class App extends Component {
 
         var promResueltampio = Promise.resolve(pruebasabermunicipio);
 
-        var datoresultante1 = promResueltampio.then((json) => {
+        promResueltampio.then((json) => {
             this.state.pruebasabermpio = json.resultado;
             return json;
         });
 
-       
         //Inicio servicio api escuela
 
-        let pruebasaberee = fetch(urlssaberee, []).then(res => res.json()).then(data => {
+        let pruebasaberee = fetch(urlssaberee, {
+            crossDomain: true,
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+        }).then(res => res.json()).then(data => {
             const newFeaturesList = data;
             return Promise.resolve({
                 resultado: newFeaturesList
@@ -264,11 +247,10 @@ class App extends Component {
 
         var promResueltaee = Promise.resolve(pruebasaberee);
 
-        var datoresultante2 = promResueltaee.then((json) => {
+        promResueltaee.then((json) => {
             this.state.pruebasaberee = json.resultado;
             return json;
         });
-
     }
 
     tooltipPie(x, y) {
@@ -301,16 +283,15 @@ class App extends Component {
             });
         });
 
-      
-        Promise.all([fetchData({longitude: this.state.center[0], latitude: this.state.center[0]}), mapLoadPromise]).then(([geojson, map]) => {
+        Promise.all([fetchData({
+            longitude: this.state.center[0],
+            latitude: this.state.center[0]
+        }), mapLoadPromise]).then(([geojson, map]) => {
             // Calculate indexes for the vulnerabilities metrics
             this.state.gjson = geojson;
             this.setState({geojson: geojson});
             this.state.gjson = geojson;
             this.state.map = map;
-
-            //this.state.loading=false;
-            //this.setState({loading:false});
         });
 
         map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
@@ -319,56 +300,59 @@ class App extends Component {
             // add the data source for new a feature collection with no features
             const {lng, lat} = map.getCenter();
 
-    
-            var recorrer=this.state.urlmunicipios;
-
-            var areglotodo=datageo1;
-
-
-            for(var i =0; i <datageo1.features.length ;i++){
-
-               recorrer.forEach(function(word) {
-
-                    if(parseInt(datageo1.features[i].id)==word['Codigo_municipio']){
-
-                        datageo1.features[i].properties.IRTE=word['IRTE'];
-                        datageo1.features[i].properties.IPM=word['IPM'];
-                        datageo1.features[i].properties.Tasa_aprobacion2018=word['Tasa_aprobacion2018'];
-                        datageo1.features[i].properties.Tasa_aprobacion2019=word['Tasa_aprobacion2019'];
-                      
-                    }
-                });
-            }
-
-          
             //layer-capa  de  los municipios
-         
-                    
-            map.addSource('states', {
-                type: 'geojson',
-               data:datageo1
-                //data: 'https://docs.mapbox.com/mapbox-gl-js/assets/us_states.geojson'
-              });
 
-              map.addLayer({
-                'id': 'state',
-                'type': 'fill',
-                'source': 'states',
-            'layout': {
-                    'visibility': 'visible'
-                },
-                'paint': {
-                'fill-color':{
-                    "property": 'IRTE',
-                    "stops": [[0, '#239B56'], [3.5, '#FFF333 '], [7, '#F91C12 ']]
-                },
-                'fill-opacity': [
-               'case',
-                ['boolean', ['feature-state', 'hover'], false],
-                1,
-                0.5
-                ]
+            //Inicio servicio api municipiosEE
+
+            var urlmunicipios = fetch(this.state.urlsmunicipios, {
+                crossDomain: true,
+                method: 'GET',
+                headers: {'Content-Type': 'application/json'},
+            }).then(res => res.json()).then(data => {
+                const newFeaturesList = data;
+                return Promise.resolve({
+                    resultado: newFeaturesList
+                });
+            });
+
+            var urlmunicipiospromesa = Promise.resolve(urlmunicipios);
+
+            urlmunicipiospromesa.then((json) => {
+                this.state.urlmunicipios = json.resultado;
+                for (var i = 0; i < datageo1.features.length; i++) {
+                    json.resultado.forEach(function (word) {
+                        if (parseInt(datageo1.features[i].id) == word['Codigo_municipio']) {
+                            datageo1.features[i].properties.IRTE = word['IRTE'];
+                            datageo1.features[i].properties.IPM = word['IPM'];
+                            datageo1.features[i].properties.Tasa_aprobacion2018 = word['Tasa_aprobacion2018'];
+                            datageo1.features[i].properties.Tasa_aprobacion2019 = word['Tasa_aprobacion2019'];
+                        }
+                    });
                 }
+                map.addSource('states', {
+                    type: 'geojson',
+                    data: datageo1
+                });
+
+                map.addLayer({
+                    'id': 'state',
+                    'type': 'fill',
+                    'source': 'states',
+                    'layout': {
+                        'visibility': 'visible'
+                    },
+                    'paint': {
+                        'fill-color': {
+                            "property": 'IRTE',
+                            "stops": [[0, '#239B56'], [3.5, '#FFF333'], [7, '#F91C12']]
+                        },
+                        'fill-opacity': [
+                            'case',
+                            ['boolean', ['feature-state', 'hover'], false],
+                            1,
+                            0.5
+                        ]
+                    }
                 });
 
                 map.addLayer({
@@ -379,63 +363,50 @@ class App extends Component {
                         'visibility': 'visible'
                     },
                     'paint': {
-                    'line-color': '#627BC1',
-                  'line-width': 2
+                        'line-color': '#627BC1',
+                        'line-width': 2
                     }
-                  });
+                });
 
-                  map.on('click', 'state', async (e) => {
-
+                map.on('click', 'state', async (e) => {
                     var IRTE = e.features[0].properties.IRTE;
                     var Municipio = e.features[0].properties.name;
                     var Departamento = e.features[0].properties.NOMBRE_DPT;
                     var IPM = e.features[0].properties.IPM;
                     var Tasa_aprobacion2018 = e.features[0].properties.Tasa_aprobacion2018;
                     var Tasa_aprobacion2019 = e.features[0].properties.Tasa_aprobacion2019;
-
-                    this.state.showmodalM=true;
+                    this.state.showmodalM = true;
                     this.showModalM();
-  
-                 
-                  
                     this.setState({M_IRTE: IRTE});
                     this.setState({M_Departamento: Departamento});
                     this.setState({M_Municipio: Municipio});
                     this.setState({M_IPM: IPM});
                     this.setState({Tasa_aprobacion2018: Tasa_aprobacion2018});
                     this.setState({Tasa_aprobacion2019: Tasa_aprobacion2019});
-                   
-                    });
+                });
 
-                   map.setLayoutProperty('state', 'visibility', 'none');
-                   map.setLayoutProperty('state-borders', 'visibility', 'none');
+                map.setLayoutProperty('state', 'visibility', 'none');
+                map.setLayoutProperty('state-borders', 'visibility', 'none');
+            });
 
-                   this.state.displayIRTE='block';
-                   this.setState({displayIRTE: 'block'});
+            //puntos
 
-            
-                    //puntos 
+            map.addSource("random-points-data", {
+                type: "geojson",
+                data: {
+                    type: "FeatureCollection",
+                    features: [],
+                },
+                cluster: true,
+                clusterMaxZoom: 14, // Max zoom to cluster points on
+                clusterRadius: 50, // Radius of each cluster when clustering points (defaults to 50)
+            });
 
+            // fetch new data
+            map.getSource("random-points-data").setData(await fetchData({longitude: lng, latitude: lat}));
 
-
-                    map.addSource("random-points-data", {
-                        type: "geojson",
-                        data: {
-                            type: "FeatureCollection",
-                            features: [],
-                        },
-                        cluster: true,
-                        clusterMaxZoom: 14, // Max zoom to cluster points on
-                        clusterRadius: 50, // Radius of each cluster when clustering points (defaults to 50)
-                    });
-                 
-                    // fetch new data
-                    map.getSource("random-points-data").setData(await fetchData({longitude: lng, latitude: lat}));
-
-
-                    this.state.loading=false;
-                    this.setState({loading:false});
-        
+            this.state.loading = false;
+            this.setState({loading: false});
 
             map.addLayer({
                 id: "clusters",
@@ -443,11 +414,6 @@ class App extends Component {
                 source: "random-points-data",
                 filter: ["has", "point_count"],
                 paint: {
-                    // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-                    // with three steps to implement three types of circles:
-                    //   * Blue, 20px circles when point count is less than 100
-                    //   * Yellow, 30px circles when point count is between 100 and 750
-                    //   * Pink, 40px circles when point count is greater than or equal to 750
                     "circle-color": [
                         "step", ["get", "point_count"],
                         "#96f3fd",
@@ -503,13 +469,13 @@ class App extends Component {
                 });
                 var clusterId = features[0].properties.cluster_id;
                 map.getSource("random-points-data").getClusterExpansionZoom(clusterId, function (err, zoom) {
-                        if (err) return;
+                    if (err) return;
 
-                        map.easeTo({
-                            center: features[0].geometry.coordinates,
-                            zoom: zoom,
-                        });
+                    map.easeTo({
+                        center: features[0].geometry.coordinates,
+                        zoom: zoom,
                     });
+                });
             });
 
             map.on("click", "unclustered-point", async (e) => {
@@ -535,15 +501,9 @@ class App extends Component {
                         y: Totalportatil
                     }]
                 };
-                // Ensure that if the map is zoomed out such that
-                // multiple copies of the feature are visible, the
-                // popup appears over the copy being pointed to.
                 while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                     coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
                 }
-                
-             //   this.state.loading=false;
-              //  this.setState({loading:false});
 
                 // Modal Content
                 this.state.show = true;
@@ -555,23 +515,14 @@ class App extends Component {
                 this.setState({Estado: Estado});
                 this.setState({Departamento: Departamento});
 
-                //new mapboxgl.Popup()
-                // .setLngLat(coordinates)
-                // .setHTML(
-                //  'Id: ' + id + '<br>' +
-                //  'Nombre: ' + nombre + '<br>' +
-                //  'Descripcion:' + description + '<br>' +
-                //   'Estado:' + Estado + '<br>' +
-                //  'Departamento:' + Departamento + '.'
-                // )
-                // .addTo(map);
-
             });
 
-            this.state.displaysedes='block';
+            this.state.displaysedes = 'block';
             this.setState({displaysedes: 'block'});
-            
-                   
+
+            this.state.displayIRTE = 'block';
+            this.setState({displayIRTE: 'block'});
+
             map.on("mouseenter", "clusters", function () {
                 map.getCanvas().style.cursor = "pointer";
             });
@@ -603,11 +554,6 @@ class App extends Component {
                     'visibility': 'visible'
                 },
                 paint: {
-                    // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-                    // with three steps to implement three types of circles:
-                    //   * Blue, 20px circles when point count is less than 100
-                    //   * Yellow, 30px circles when point count is between 100 and 750
-                    //   * Pink, 40px circles when point count is greater than or equal to 750
                     "circle-color": [
                         "step", ["get", "point_count"],
                         "#4974a5",
@@ -662,96 +608,70 @@ class App extends Component {
                 layers: ["unclustered-point-EE"],
             });
 
-           
-                 // inspect a cluster on click
-                 map.on("click", "clustersEE", function (e) {
-                    var features = map.queryRenderedFeatures(e.point, {
-                        layers: ["clustersEE"],
+
+            // inspect a cluster on click
+            map.on("click", "clustersEE", function (e) {
+                var features = map.queryRenderedFeatures(e.point, {
+                    layers: ["clustersEE"],
+                });
+                var clusterId = features[0].properties.cluster_id;
+                map.getSource("listaEE").getClusterExpansionZoom(clusterId, function (err, zoom) {
+                    if (err) return;
+
+                    map.easeTo({
+                        center: features[0].geometry.coordinates,
+                        zoom: zoom,
                     });
-                    var clusterId = features[0].properties.cluster_id;
-                    map.getSource("listaEE").getClusterExpansionZoom(clusterId, function (err, zoom) {
-                            if (err) return;
-    
-                            map.easeTo({
-                                center: features[0].geometry.coordinates,
-                                zoom: zoom,
-                            });
-                        });
                 });
+            });
 
 
-                map.on("click", "unclustered-point-EE", async (e) => {
-                    var coordinates = e.features[0].geometry.coordinates.slice();
-                    var id = e.features[0].properties.id;
-                    var nombre = e.features[0].properties.Nombreestablecimiento;
-                    var IRTE = e.features[0].properties.IRTE;
-                    var Municipio = e.features[0].properties.Municipio;
-                    var Departamento = e.features[0].properties.Departamento;
-                    var Sector_atencion = e.features[0].properties.Sector_atencion;
-                    var Calendario = e.features[0].properties.Calendario;
-                    var Tasa_aprobacion = e.features[0].properties.Tasa_aprobacion;
-                    var Tasa_reprobacion = e.features[0].properties.Tasa_reprobacion;
-                    var Tasa_desercion = e.features[0].properties.Tasa_desercion;
-    
-                    // Ensure that if the map is zoomed out such that
-                    // multiple copies of the feature are visible, the
-                    // popup appears over the copy being pointed to.
-                    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-                    }
-                   
-                 //   this.state.loading=false;
-                  //  this.setState({loading:false});
+            map.on("click", "unclustered-point-EE", async (e) => {
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var id = e.features[0].properties.id;
+                var nombre = e.features[0].properties.Nombreestablecimiento;
+                var IRTE = e.features[0].properties.IRTE;
+                var Municipio = e.features[0].properties.Municipio;
+                var Departamento = e.features[0].properties.Departamento;
+                var Sector_atencion = e.features[0].properties.Sector_atencion;
+                var Calendario = e.features[0].properties.Calendario;
+                var Tasa_aprobacion = e.features[0].properties.Tasa_aprobacion;
+                var Tasa_reprobacion = e.features[0].properties.Tasa_reprobacion;
+                var Tasa_desercion = e.features[0].properties.Tasa_desercion;
 
-                  this.state.showmodalEE=true;
-                  this.showModalEE();
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
 
-               
-                  this.setState({Nombreestablecimiento: nombre});
-                  this.setState({IRTE: IRTE});
-                  this.setState({DepartamentoEE: Departamento});
-                  this.setState({MunicipioEE: Municipio});
-                  this.setState({Sector_atencion: Sector_atencion});
-                  this.setState({Calendario: Calendario});
-                  this.setState({Tasa_aprobacion: Tasa_aprobacion});
-                  this.setState({Tasa_reprobacion: Tasa_reprobacion});
-                  this.setState({Tasa_desercion: Tasa_desercion});
+                this.state.showmodalEE = true;
+                this.showModalEE();
 
-                });
+                this.setState({Nombreestablecimiento: nombre});
+                this.setState({IRTE: IRTE});
+                this.setState({DepartamentoEE: Departamento});
+                this.setState({MunicipioEE: Municipio});
+                this.setState({Sector_atencion: Sector_atencion});
+                this.setState({Calendario: Calendario});
+                this.setState({Tasa_aprobacion: Tasa_aprobacion});
+                this.setState({Tasa_reprobacion: Tasa_reprobacion});
+                this.setState({Tasa_desercion: Tasa_desercion});
 
-                this.state.displayestablecimientos='block';
-                this.setState({displayestablecimientos: 'block'});
+            });
 
-     
+            this.state.displayestablecimientos = 'block';
+            this.setState({displayestablecimientos: 'block'});
+
             map.on("mouseenter", "clustersEE", function () {
                 map.getCanvas().style.cursor = "pointer";
             });
             map.on("mouseleave", "clustersEE", function () {
                 map.getCanvas().style.cursor = "";
             });
-
-
         });
-
-        //map.on("moveend", function(e) {
-        // get new center coordinates
-        //  const { lng, lat } = map.getCenter();
-        // fetch new data
-
-
-        // update "random-points-data" source with new data
-        // all layers that consume the "random-points-data" data source will be updated automatically
-        //   map.getSource("random-points-data").setData(results);
-        // });
     }
 
 
-    
-
     updateValue(e) {
-
-      
-
         if (e.target.name == "CONECTADO") {
             this.setState({checkconectado: true});
             this.setState({checkdesconectado: false});
@@ -1262,6 +1182,7 @@ class App extends Component {
     handleCloseEE() {
         this.setState({showmodalEE: false});
     }
+
     handleCloseM() {
         this.setState({showmodalM: false});
     }
@@ -1290,7 +1211,6 @@ class App extends Component {
         this.setState({showmodal: false});
     }
 
-
     //funcion de select con filtro por ancho de banda y totalcompu
     filtrovalores(e) {
         if (e.target.name == "Sfiltro") {
@@ -1306,78 +1226,63 @@ class App extends Component {
         }
     }
 
-    hoverlayers(e){
+    hoverlayers(e) {
 
-    if(e.target.name=="primeracapa"){
+        if (e.target.name == "primeracapa") {
+            if (e.target.className == "active") {
+                this.state.map.setLayoutProperty('clusters', 'visibility', 'none');
+                this.state.map.setLayoutProperty('cluster-count', 'visibility', 'none');
+                this.state.map.setLayoutProperty('unclustered-point', 'visibility', 'none');
+                this.state.layoutcolegios = "";
+                this.setState({layoutcolegios: ""});
+                this.state.filtrosede = 'none';
+            } else {
 
-        if(e.target.className=="active"){
 
-    this.state.map.setLayoutProperty('clusters', 'visibility', 'none');
-    this.state.map.setLayoutProperty('cluster-count', 'visibility', 'none');
-    this.state.map.setLayoutProperty('unclustered-point', 'visibility', 'none');
-    this.state.layoutcolegios="";
-    this.setState({layoutcolegios: ""});
-    this.state.filtrosede='none';
-
-        }else{
-
-    this.state.map.setLayoutProperty('clusters', 'visibility', 'visible');
-    this.state.map.setLayoutProperty('cluster-count', 'visibility', 'visible');
-    this.state.map.setLayoutProperty('unclustered-point', 'visibility', 'visible');
-    this.state.layoutcolegios="active";
-    this.setState({layoutcolegios: "active"});
-    this.state.filtrosede='block';
-
+                this.state.map.setLayoutProperty('clusters', 'visibility', 'visible');
+                this.state.map.setLayoutProperty('cluster-count', 'visibility', 'visible');
+                this.state.map.setLayoutProperty('unclustered-point', 'visibility', 'visible');
+                this.state.layoutcolegios = "active";
+                this.setState({layoutcolegios: "active"});
+                this.state.filtrosede = 'block';
+            }
         }
 
-
-    }
-
-        if(e.target.name=="segundacapa"){
-
-            if(e.target.className=="active"){
-
+        if (e.target.name == "segundacapa") {
+            if (e.target.className == "active") {
                 this.state.map.setLayoutProperty('state', 'visibility', 'none');
                 this.state.map.setLayoutProperty('state-borders', 'visibility', 'none');
-                this.state.layoutmunicipios="";
+                this.state.layoutmunicipios = "";
                 this.setState({layoutmunicipios: ""});
-                this.state.display='none';
-            
-            }else{
-            
-                this.state.map.setLayoutProperty('state', 'visibility', 'visible');
-                this.state.map.setLayoutProperty('state-borders', 'visibility', 'visible');
-                this.state.layoutmunicipios="active";
-                this.state.display='block';
-                this.setState({layoutmunicipios: "active"});
-            
+                this.state.display = 'none';
+            } else {
+                try {
+                    this.state.map.setLayoutProperty('state', 'visibility', 'visible');
+                    this.state.map.setLayoutProperty('state-borders', 'visibility', 'visible');
+                    this.state.layoutmunicipios = "active";
+                    this.state.display = 'block';
+                    this.setState({layoutmunicipios: "active"});
+                } catch (err) {
+                    console.log(err);
+                }
             }
-
         }
 
-        if(e.target.name=="terceracapa"){
-
-            if(e.target.className=="active"){
-
+        if (e.target.name == "terceracapa") {
+            if (e.target.className == "active") {
                 this.state.map.setLayoutProperty('clustersEE', 'visibility', 'none');
                 this.state.map.setLayoutProperty('cluster-countEE', 'visibility', 'none');
                 this.state.map.setLayoutProperty('unclustered-point-EE', 'visibility', 'none');
-                this.state.layoutEE="";
+                this.state.layoutEE = "";
                 this.setState({layoutEE: ""});
-            
-                    }else{
-            
+            } else {
                 this.state.map.setLayoutProperty('clustersEE', 'visibility', 'visible');
                 this.state.map.setLayoutProperty('cluster-countEE', 'visibility', 'visible');
                 this.state.map.setLayoutProperty('unclustered-point-EE', 'visibility', 'visible');
-                this.state.layoutEE="active";
+                this.state.layoutEE = "active";
                 this.setState({layoutEE: "active"});
-            
-                    }
-
+            }
         }
-
-
     }
 
     areglografica(e) {
@@ -1607,14 +1512,14 @@ class App extends Component {
 
     render() {
 
-    const arraympio= this.state.arraymunicipios;
-  
+        const arraympio = this.state.arraymunicipios;
+
 
         return (
             <div className="app">
-               
+
                 <div className="map-container" ref={el => this.mapContainer = el}>
-             
+
                 </div>
                 <div className="example-container">
                     <div className={`input-container ${this.state.openPanel ? 'active' : ''}`}>
@@ -1652,53 +1557,53 @@ class App extends Component {
 
                     <div className="layers">
 
-                    <Nav  as="ul">
-  <Nav.Item as="li" style={{display:this.state.displaysedes}}>
-    <a name="primeracapa" className={this.state.layoutcolegios} onClick={this.hoverlayers} href="#">Sedes</a>
-  </Nav.Item>
-  <Nav.Item as="li" style={{display:this.state.displayIRTE}}>
-    <a name="segundacapa" className={this.state.layoutmunicipios} onClick={this.hoverlayers} href="#">IRTE (Municipios)</a>
-  </Nav.Item>
-  <Nav.Item as="li" style={{display:this.state.displayestablecimientos}}>
-    <a name="terceracapa" className={this.state.layoutEE} onClick={this.hoverlayers} href="#" >Establecimientos</a>
-  </Nav.Item>
-</Nav>
+                        <Nav as="ul">
+                            <Nav.Item as="li" style={{display: this.state.displaysedes}}>
+                                <a name="primeracapa" className={this.state.layoutcolegios} onClick={this.hoverlayers}
+                                   href="#">Sedes</a>
+                            </Nav.Item>
+                            <Nav.Item as="li" style={{display: this.state.displayIRTE}}>
+                                <a name="segundacapa" className={this.state.layoutmunicipios} onClick={this.hoverlayers}
+                                   href="#">IRTE (Municipios)</a>
+                            </Nav.Item>
+                            <Nav.Item as="li" style={{display: this.state.displayestablecimientos}}>
+                                <a name="terceracapa" className={this.state.layoutEE} onClick={this.hoverlayers}
+                                   href="#">Establecimientos</a>
+                            </Nav.Item>
+                        </Nav>
 
                     </div>
 
-                    <div className="map-overlay"  style={{display:this.state.display}} id="legend">
+                    <div className="map-overlay" style={{display: this.state.display}} id="legend">
 
                         <div>
-                        <span className="legend-key" ></span>
-                        <span>&#8249; 3.5</span>
-                         </div>
+                            <span className="legend-key"></span>
+                            <span>&#8249; 3.5</span>
+                        </div>
                         <div>
-                        <span className="legend-key1" ></span>
-                        <span>3.5 - 6.99 </span>
-                         </div>
+                            <span className="legend-key1"></span>
+                            <span>3.5 - 6.99</span>
+                        </div>
                         <div>
-                        <span className="legend-key2" ></span>
-                        <span>&#8250; = 7</span>
-                         </div>
+                            <span className="legend-key2"></span>
+                            <span>&#8250; = 7</span>
+                        </div>
 
                     </div>
 
 
-    <div  className='row m-0  justify-content-center align-items-center vh-100'>
-        
-    <HashLoader
-                    size={80}
-                    color={"#123abc"}
-                    loading={this.state.loading}
-                    css=''
-                />
-    
-    </div>
+                    <div className='row m-0  justify-content-center align-items-center vh-100'>
 
- 
+                        <HashLoader
+                            size={80}
+                            color={"#123abc"}
+                            loading={this.state.loading}
+                            css=''
+                        />
 
-                  
-                 
+                    </div>
+
+
                     <SlidingPanel
                         type={this.state.panelType}
                         isOpen={this.state.openPanel}
@@ -1793,7 +1698,7 @@ class App extends Component {
                                     </Form.Group>
                                 </Col>
                             </Row>
-                            <div className="row" style={{display:this.state.filtrosede}}>
+                            <div className="row" style={{display: this.state.filtrosede}}>
                                 <Button variant="primary" type="submit" onClick={this.updateValue}>
                                     Filtrar
                                 </Button>
@@ -1903,17 +1808,16 @@ class App extends Component {
                 </Modal>
 
 
-
                 <Modal size="lg" show={this.state.showmodalEE} onHide={this.handleCloseEE}>
                     <Modal.Header closeButton>
                         <Modal.Title>{this.state.Nombreestablecimiento}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
 
-                    <Table striped bordered hover size="sm">
+                        <Table striped bordered hover size="sm">
                             <tbody>
                             <tr>
-                                <td>Nombre Est</td>
+                                <td>Nombre</td>
                                 <td>{this.state.Nombreestablecimiento}</td>
                             </tr>
                             <tr>
@@ -1925,7 +1829,7 @@ class App extends Component {
                                 <td>{this.state.MunicipioEE}</td>
                             </tr>
                             <tr>
-                                <td>Sector Atencion</td>
+                                <td>Sector Atención</td>
                                 <td>{this.state.Sector_atencion}</td>
                             </tr>
                             <tr>
@@ -1933,7 +1837,7 @@ class App extends Component {
                                 <td>{this.state.Calendario}</td>
                             </tr>
                             <tr>
-                                <td>Tasa aprobacion</td>
+                                <td>Tasa aprobación</td>
                                 <td>{this.state.Tasa_aprobacion}</td>
                             </tr>
                             <tr>
@@ -1951,7 +1855,6 @@ class App extends Component {
                             </tbody>
                         </Table>
 
-      
 
                     </Modal.Body>
                     <Modal.Footer>
@@ -1965,7 +1868,7 @@ class App extends Component {
                     </Modal.Header>
                     <Modal.Body>
 
-                    <Table striped bordered hover size="sm">
+                        <Table striped bordered hover size="sm">
                             <tbody>
                             <tr>
                                 <td>Departamento</td>
@@ -1980,11 +1883,11 @@ class App extends Component {
                                 <td>{this.state.M_IPM}</td>
                             </tr>
                             <tr>
-                                <td>Tasa aprobacion 2018</td>
+                                <td>Tasa aprobación 2018</td>
                                 <td>{this.state.Tasa_aprobacion2018}</td>
                             </tr>
                             <tr>
-                                <td>Tasa aprobacion 2019</td>
+                                <td>Tasa aprobación 2019</td>
                                 <td>{this.state.Tasa_aprobacion2019}</td>
                             </tr>
                             <tr>
@@ -1994,13 +1897,11 @@ class App extends Component {
                             </tbody>
                         </Table>
 
-      
 
                     </Modal.Body>
                     <Modal.Footer>
                     </Modal.Footer>
                 </Modal>
-
 
 
                 <Modal size="lg" show={this.state.show} onHide={this.handleClose}>
